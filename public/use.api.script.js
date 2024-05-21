@@ -54,8 +54,9 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = { IsOpenOn, NextOpeningDate, SetOpeningHours };
 } else {
     try {
-        document.getElementById('status-api').innerText = `Le magasin est ${IsOpenOn(new Date()) ? 'ouvert' : 'fermé'}`;
-        document.getElementById('next-opening-api').innerText = `Prochaine ouverture : ${NextOpeningDate(new Date())}`;
+        const now = new Date();
+        document.getElementById('status-api').innerText = `Le magasin est ${IsOpenOn(now) ? 'ouvert' : 'fermé'}`;
+        document.getElementById('next-opening-api').innerText = `Prochaine ouverture : ${NextOpeningDate(now)}`;
     } catch (error) {
         console.error('Error fetching data:', error);
         document.getElementById('status-api').innerText = 'Error fetching status';
