@@ -23,7 +23,7 @@ async function NextOpeningDate(date) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data);
+        console.log(data.nextOpening);
         return new Date(data.nextOpening);
     } catch (error) {
         console.error('Error:', error);
