@@ -1,6 +1,5 @@
 async function IsOpenOn(date) {
     const queryDate = date.toISOString();
-    console.log(queryDate);
     const url = `https://horaire-magasin.vercel.app/api/isopenon?date=${queryDate}`;
     try {
         const response = await fetch(url);
@@ -24,6 +23,7 @@ async function NextOpeningDate(date) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
+        console.log(data);
         return new Date(data.nextOpening);
     } catch (error) {
         console.error('Error:', error);
