@@ -64,13 +64,11 @@ async function fetchJson(url) {
     return await response.json();
 }
 
-function toLocalTime(dateString) {
-    console.log(dateString);
-    const date = new Date(dateString);
+function toLocalTime(date) {
     console.log(date);
-    // Convert to local time
+    // Convert to german frankfurt local time
     let formatted = date.toLocaleString('fr-FR', {
-        timeZone: 'Europe/Zurich',
+        timeZone: 'fra1',
         weekday: 'long',
         day: 'numeric',
         month: 'long',
