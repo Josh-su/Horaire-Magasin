@@ -68,7 +68,7 @@ function toLocalTime(date) {
     console.log(date);
     // Convert to german frankfurt local time
     let formatted = date.toLocaleString('fr-FR', {
-        timeZone: 'Europe',
+        timeZone: 'Europe/Frankfurt',
         weekday: 'long',
         day: 'numeric',
         month: 'long',
