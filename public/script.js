@@ -69,7 +69,7 @@ function toLocalTime(dateString) {
     const date = new Date(dateString);
     console.log(dateString);
     // Convert to local time
-    return date.toLocaleString('fr-FR', {
+    let formated = date.toLocaleString('fr-FR', {
         timeZone: 'Europe/Zurich', // Ensure this matches the time zone of your API server
         weekday: 'long',
         day: 'numeric',
@@ -78,6 +78,8 @@ function toLocalTime(dateString) {
         hour: '2-digit',
         minute: '2-digit'
     });
+    console.log(formated);
+    return formated;
 }
 
 if (typeof module !== 'undefined' && module.exports) {
