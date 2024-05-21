@@ -61,16 +61,16 @@ async function fetchJson(url) {
     if (response.status < 200 || response.status >= 300) {
         throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    return await response.json(); // Return the parsed JSON data
+    return await response.json();
 }
 
 function toLocalTime(dateString) {
     console.log(dateString);
     const date = new Date(dateString);
-    console.log(dateString);
+    console.log(date);
     // Convert to local time
-    let formated = date.toLocaleString('fr-FR', {
-        timeZone: 'Europe/Zurich', // Ensure this matches the time zone of your API server
+    let formatted = date.toLocaleString('fr-FR', {
+        timeZone: 'Europe/Zurich',
         weekday: 'long',
         day: 'numeric',
         month: 'long',
@@ -78,36 +78,33 @@ function toLocalTime(dateString) {
         hour: '2-digit',
         minute: '2-digit'
     });
-    console.log(formated);
-    return formated;
+    console.log(formatted);
+    return formatted;
 }
 
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { IsOpenOn, NextOpeningDate };
 } else {
     document.addEventListener('DOMContentLoaded', async () => {
-        const now = new Date(); // Use current date and time
+        const now = new Date();
         document.getElementById('status').innerText = IsOpenOn(now) ? 'Le magasin est ouvert.' : 'Le magasin est fermé.';
         document.getElementById('next-opening').innerText = 'Prochaine ouverture: ' + toLocalTime(NextOpeningDate(now));
 
         try {
-            const isOpenUrl = `https://horaire-magasin.vercel.app/api/isopen?date=${now}`;
-            const nextOpeningUrl = `https://horaire-magasin.vercel.app/api/nextopening?date=${now}`;
+            const isOpenUrl = `https://horaire-magasin.vercel.app/api/isopen?date=${now.toISOString()}`;
+            const nextOpeningUrl = `https://horaire-magasin.vercel.app/api/nextopening?date=${now.toISOString()}`;
 
-            // Fetch data from your API
             const [statusData, nextOpeningData] = await Promise.all([
                 fetchJson(isOpenUrl),
                 fetchJson(nextOpeningUrl)
             ]);
 
-            // Handle status API response
             if (statusData.error) {
                 document.getElementById('status-api').innerText = `Error: ${statusData.error}`;
             } else {
                 document.getElementById('status-api').innerText = `Le magasin est ${statusData.isOpen ? 'ouvert' : 'fermé'}`;
             }
 
-            // Handle next opening API response
             if (nextOpeningData.error) {
                 document.getElementById('next-opening-api').innerText = `Error: ${nextOpeningData.error}`;
             } else {
