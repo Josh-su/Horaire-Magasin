@@ -64,7 +64,9 @@ async function fetchJson(url) {
     return await response.json();
 }
 
-function toLocalTime(date) {
+function toLocalTime(dateString) {
+    console.log(dateString);
+    let date = new Date(dateString);
     console.log(date);
     // Convert to german frankfurt local time
     let formatted = date.toLocaleString('fr-FR', {
