@@ -127,10 +127,16 @@ if (typeof module !== 'undefined' && module.exports) {
             }
         }
 
-        // URL to fetch the JSON data from
+// URL to fetch the JSON data from
         const url = 'https://horaire-magasin.vercel.app/api/isopen?date=2024-05-21T19:33:00';
 
-        // Fetch and display the data
-        console.log(_fetchJson(url));
+// Fetch and display the data
+        _fetchJson(url).then(data => {
+            if (data) {
+                let isOpen = data.isOpen;
+                console.log('isOpen:', isOpen);
+                // Now you can use the isOpen variable as needed
+            }
+        });
     });
 }
