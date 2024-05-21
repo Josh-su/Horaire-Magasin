@@ -65,17 +65,10 @@ async function fetchJson(url) {
 }
 
 function toLocalTime(dateISOString) {
-    console.log(dateISOString);
     // Parse the ISO string into a Date object
     let date = new Date(dateISOString);
-
-    // Check if the Date object is valid
-    if (isNaN(date)) {
-        throw new Error('Invalid date');
-    }
-
     // Format the date to the desired locale and time zone
-    let formatted = date.toLocaleString('fr-FR', {
+    return date.toLocaleString('fr-FR', {
         timeZone: 'Europe/Berlin',
         weekday: 'long',
         day: 'numeric',
@@ -84,8 +77,6 @@ function toLocalTime(dateISOString) {
         hour: '2-digit',
         minute: '2-digit'
     });
-    console.log(formatted);
-    return formatted;
 }
 
 if (typeof module !== 'undefined' && module.exports) {
@@ -114,7 +105,7 @@ if (typeof module !== 'undefined' && module.exports) {
             if (nextOpeningData.error) {
                 document.getElementById('next-opening-api').innerText = `Error: ${nextOpeningData.error}`;
             } else {
-                document.getElementById('next-opening-api').innerText = `Prochaine ouverture : ${toLocalTime(nextOpeningData.nextOpening)}`;
+                document.getElementById('next-opening-api').innerText = `Prochaine ouverture : ${nextOpeningData.nextOpening}`;
             }
         } catch (error) {
             console.error('Error fetching data:', error);
