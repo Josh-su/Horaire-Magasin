@@ -1,13 +1,13 @@
 const { IsOpenOn, NextOpeningDate } = require('../public/script.js');
 
 const testDates = {
-    wednesday: new Date('2024-02-21T07:45:00.000'),
-    thursday: new Date('2024-02-22T12:22:11.824'),
-    saturday: new Date('2024-02-24T09:15:00.000'),
-    sunday: new Date('2024-02-25T09:15:00.000'),
-    friday_morning: new Date('2024-02-23T08:00:00.000'),
-    monday_morning: new Date('2024-02-26T08:00:00.000'),
-    thursday_afternoon: new Date('2024-02-22T14:00:00.000'),
+    wednesday: new Date('2024-02-21T07:45:00.000Z'),
+    thursday: new Date('2024-02-22T12:22:11.824Z'),
+    saturday: new Date('2024-02-24T09:15:00.000Z'),
+    sunday: new Date('2024-02-25T09:15:00.000Z'),
+    friday_morning: new Date('2024-02-23T08:00:00.000Z'),
+    monday_morning: new Date('2024-02-26T08:00:00.000Z'),
+    thursday_afternoon: new Date('2024-02-22T14:00:00.000Z'),
 };
 
 test('IsOpenOn returns false for Wednesday', () => {
