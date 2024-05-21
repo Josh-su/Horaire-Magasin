@@ -65,10 +65,12 @@ async function fetchJson(url) {
 }
 
 function toLocalTime(dateString) {
+    console.log(dateString);
     const date = new Date(dateString);
+    console.log(dateString);
     // Convert to local time
     return date.toLocaleString('fr-FR', {
-        timeZone: 'Europe/Paris', // Ensure this matches the time zone of your API server
+        timeZone: 'Europe/Zurich', // Ensure this matches the time zone of your API server
         weekday: 'long',
         day: 'numeric',
         month: 'long',
@@ -107,8 +109,7 @@ if (typeof module !== 'undefined' && module.exports) {
             if (nextOpeningData.error) {
                 document.getElementById('next-opening-api').innerText = `Error: ${nextOpeningData.error}`;
             } else {
-                const nextOpeningDate = new Date(nextOpeningData.nextOpening);
-                document.getElementById('next-opening-api').innerText = `Prochaine ouverture : ${toLocalTime(nextOpeningDate)}`;
+                document.getElementById('next-opening-api').innerText = `Prochaine ouverture : ${toLocalTime(nextOpeningData.nextOpening)}`;
             }
         } catch (error) {
             console.error('Error fetching data:', error);
