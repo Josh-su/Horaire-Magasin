@@ -112,5 +112,25 @@ if (typeof module !== 'undefined' && module.exports) {
             document.getElementById('status-api').innerText = 'Error fetching status';
             document.getElementById('next-opening-api').innerText = 'Error fetching next opening';
         }
+
+        async function _fetchJson(url) {
+            try {
+                const response = await fetch(url);
+                if (response.status < 200 || response.status >= 300) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log(data);
+                return data;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // URL to fetch the JSON data from
+        const url = 'https://horaire-magasin.vercel.app/api/isopen?date=2024-05-21T19:33:00';
+
+        // Fetch and display the data
+        console.log(_fetchJson(url));
     });
 }
