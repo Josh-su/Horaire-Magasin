@@ -1,0 +1,26 @@
+.test-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.test-section {
+    flex: 1;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+#testVariables {
+    flex-basis: 100%; /* Make the testVariables list take up the full width */
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+#testList, #testResults {
+    flex-basis: 50%; /* Make the testLists and testResults lists each take up 50% of the width */
+}
