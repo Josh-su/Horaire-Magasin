@@ -54,13 +54,15 @@ async function SetOpeningHours(day, startTime = "", endTime = "") {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { IsOpenOn, NextOpeningDate, SetOpeningHours };
 } else {
-    try {
-        const now = new Date();
-        document.getElementById('status-api').innerText = IsOpenOn(now) ? 'Le magasin est ouvert.' : 'Le magasin est fermé.';
-        document.getElementById('next-opening-api').innerText = `Prochaine ouverture : ${NextOpeningDate(now)}`;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        document.getElementById('status-api').innerText = 'Error fetching status';
-        document.getElementById('next-opening-api').innerText = 'Error fetching next opening';
-    }
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            const now = new Date();
+            document.getElementById('status-api').innerText = IsOpenOn(now) ? 'Le magasin est ouvert.' : 'Le magasin est fermé.';
+            document.getElementById('next-opening-api').innerText = `Prochaine ouverture : ${NextOpeningDate(now)}`;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            document.getElementById('status-api').innerText = 'Error fetching status';
+            document.getElementById('next-opening-api').innerText = 'Error fetching next opening';
+        }
+    });
 }
