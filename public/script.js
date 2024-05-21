@@ -64,11 +64,17 @@ async function fetchJson(url) {
     return await response.json();
 }
 
-function toLocalTime(dateString) {
-    console.log(dateString);
-    let date = new Date(dateString);
-    console.log(date);
-    // Convert to german frankfurt local time
+function toLocalTime(dateISOString) {
+    console.log(dateISOString);
+    // Parse the ISO string into a Date object
+    let date = new Date(dateISOString);
+
+    // Check if the Date object is valid
+    if (isNaN(date)) {
+        throw new Error('Invalid date');
+    }
+
+    // Format the date to the desired locale and time zone
     let formatted = date.toLocaleString('fr-FR', {
         timeZone: 'Europe/Berlin',
         weekday: 'long',
