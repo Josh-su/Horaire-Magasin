@@ -1,4 +1,4 @@
-const { IsOpen, NextOpening, SetOpeningHours } = require('../public/use.api.script');
+const { IsOpenOn, NextOpeningDate, SetOpeningHours } = require('../public/use.api.script');
 
 const testDates = {
     wednesday: new Date('2024-02-21T07:45:00.000'),
@@ -11,28 +11,28 @@ const testDates = {
 };
 
 test('IsOpenOn API returns false for Wednesday', async () => {
-    expect(await IsOpen(testDates.wednesday)).toBe(false);
+    expect(await IsOpenOn(testDates.wednesday)).toBe(false);
 });
 
 test('IsOpenOn API returns false for Thursday', async () => {
-    expect(await IsOpen(testDates.thursday)).toBe(false);
+    expect(await IsOpenOn(testDates.thursday)).toBe(false);
 });
 
 test('IsOpenOn API returns false for Sunday', async () => {
-    expect(await IsOpen(testDates.sunday)).toBe(false);
+    expect(await IsOpenOn(testDates.sunday)).toBe(false);
 });
 
 test('NextOpeningDate API returns Friday morning for Thursday afternoon', async () => {
-    const response = await NextOpening(testDates.thursday_afternoon);
+    const response = await NextOpeningDate(testDates.thursday_afternoon);
     expect(response).toStrictEqual(testDates.friday_morning);
 });
 
 test('NextOpeningDate API returns Monday morning for Saturday', async () => {
-    const response = await NextOpening(testDates.saturday);
+    const response = await NextOpeningDate(testDates.saturday);
     expect(response).toStrictEqual(testDates.monday_morning);
 });
 
 test('NextOpeningDate API returns Thursday afternoon for Thursday', async () => {
-    const response = await NextOpening(testDates.thursday);
+    const response = await NextOpeningDate(testDates.thursday);
     expect(response).toStrictEqual(testDates.thursday_afternoon);
 });

@@ -1,4 +1,4 @@
-async function IsOpen(date) {
+async function IsOpenOn(date) {
     const queryDate = date.toISOString();
     const url = `https://horaire-magasin.vercel.app/api/isopen?date=${queryDate}`;
     try {
@@ -14,7 +14,7 @@ async function IsOpen(date) {
     }
 }
 
-async function NextOpening(date) {
+async function NextOpeningDate(date) {
     const queryDate = date.toISOString();
     const url = `https://horaire-magasin.vercel.app/api/nextopening?date=${queryDate}`;
     try {
@@ -51,11 +51,11 @@ async function SetOpeningHours(day, startTime = "", endTime = "") {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { IsOpen, NextOpening, SetOpeningHours };
+    module.exports = { IsOpenOn, NextOpeningDate, SetOpeningHours };
 } else {
     try {
-        document.getElementById('status-api').innerText = `Le magasin est ${IsOpen(new Date()) ? 'ouvert' : 'fermé'}`;
-        document.getElementById('next-opening-api').innerText = `Prochaine ouverture : ${NextOpening(new Date())}`;
+        document.getElementById('status-api').innerText = `Le magasin est ${IsOpenOn(new Date()) ? 'ouvert' : 'fermé'}`;
+        document.getElementById('next-opening-api').innerText = `Prochaine ouverture : ${NextOpeningDate(new Date())}`;
     } catch (error) {
         console.error('Error fetching data:', error);
         document.getElementById('status-api').innerText = 'Error fetching status';

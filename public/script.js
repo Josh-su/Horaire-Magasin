@@ -92,6 +92,6 @@ if (typeof module !== 'undefined' && module.exports) {
     document.addEventListener('DOMContentLoaded', async () => {
         const now = new Date();
         document.getElementById('status').innerText = IsOpenOn(now) ? 'Le magasin est ouvert.' : 'Le magasin est fermé.';
-        document.getElementById('next-opening').innerText = 'Prochaine ouverture: ' + toLocalTime(NextOpeningDate(now));
+        document.getElementById('next-opening').innerText = 'Prochaine ouverture: ' + NextOpeningDate(now);
     });
 }
