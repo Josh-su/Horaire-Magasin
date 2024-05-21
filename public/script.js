@@ -57,11 +57,15 @@ function NextOpeningDate(date) {
 }
 
 async function fetchJson(url) {
-    const response = await fetch(url);
-    if (response.status < 200 || response.status >= 300) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+    try {
+        const response = await fetch(url);
+        if (response.status < 200 || response.status >= 300) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching data:', error);
     }
-    return await response.json();
 }
 
 function toLocalTime(dateISOString) {
@@ -83,7 +87,7 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = { IsOpenOn, NextOpeningDate };
 } else {
     document.addEventListener('DOMContentLoaded', async () => {
-        const now = new Date();
+        const now = new Date().toISOString();
         document.getElementById('status').innerText = IsOpenOn(now) ? 'Le magasin est ouvert.' : 'Le magasin est fermé.';
         document.getElementById('next-opening').innerText = 'Prochaine ouverture: ' + toLocalTime(NextOpeningDate(now));
 
@@ -91,50 +95,25 @@ if (typeof module !== 'undefined' && module.exports) {
             const isOpenUrl = `https://horaire-magasin.vercel.app/api/isopen?date=${now.toISOString()}`;
             const nextOpeningUrl = `https://horaire-magasin.vercel.app/api/nextopening?date=${now.toISOString()}`;
 
-            const [statusData, nextOpeningData] = await Promise.all([
-                fetchJson(isOpenUrl),
-                fetchJson(nextOpeningUrl)
-            ]);
+            let isOpen = fetchJson(isOpenUrl).then(data => {
+                if (data) {
+                    console.log('isOpen:', isOpen);
+                    return data.isOpen;
+                }
+            });
+            let nextOpening = fetchJson(nextOpeningUrl).then(data => {
+                if (data) {
+                    console.log('nextOpening:', nextOpening);
+                    return data.nextOpening;
+                }
+            })
+            document.getElementById('status-api').innerText = `Le magasin est ${isOpen ? 'ouvert' : 'fermé'}`;
+            document.getElementById('next-opening-api').innerText = `Prochaine ouverture : ${nextOpening}`;
 
-            if (statusData.error) {
-                document.getElementById('status-api').innerText = `Error: ${statusData.error}`;
-            } else {
-                document.getElementById('status-api').innerText = `Le magasin est ${statusData.isOpen ? 'ouvert' : 'fermé'}`;
-            }
-
-            if (nextOpeningData.error) {
-                document.getElementById('next-opening-api').innerText = `Error: ${nextOpeningData.error}`;
-            } else {
-                document.getElementById('next-opening-api').innerText = `Prochaine ouverture : ${nextOpeningData.nextOpening}`;
-            }
         } catch (error) {
             console.error('Error fetching data:', error);
             document.getElementById('status-api').innerText = 'Error fetching status';
             document.getElementById('next-opening-api').innerText = 'Error fetching next opening';
         }
-
-        async function _fetchJson(url) {
-            try {
-                const response = await fetch(url);
-                if (response.status < 200 || response.status >= 300) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return await response.json();
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
-
-        // URL to fetch the JSON data from
-        const url = 'https://horaire-magasin.vercel.app/api/isopen?date=2024-05-21T19:33:00';
-
-        // Fetch and display the data
-        _fetchJson(url).then(data => {
-            if (data) {
-                let isOpen = data.isOpen;
-                console.log('isOpen:', isOpen);
-                // Now you can use the isOpen variable as needed
-            }
-        });
     });
 }
