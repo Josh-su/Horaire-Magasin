@@ -23,7 +23,6 @@ async function NextOpeningDate(date) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data.nextOpening);
         return new Date(data.nextOpening);
     } catch (error) {
         console.error('Error:', error);
@@ -57,8 +56,8 @@ if (typeof module !== 'undefined' && module.exports) {
     document.addEventListener('DOMContentLoaded', async () => {
         try {
             const now = new Date();
-            document.getElementById('status-api').innerText = IsOpenOn(now) ? 'Le magasin est ouvert.' : 'Le magasin est fermé.';
-            document.getElementById('next-opening-api').innerText = `Prochaine ouverture : ${NextOpeningDate(now)}`;
+            document.getElementById('status-api').innerText = await IsOpenOn(now) ? 'Le magasin est ouvert.' : 'Le magasin est fermé.';
+            document.getElementById('next-opening-api').innerText = `Prochaine ouverture : ${await NextOpeningDate(now)}`;
         } catch (error) {
             console.error('Error fetching data:', error);
             document.getElementById('status-api').innerText = 'Error fetching status';

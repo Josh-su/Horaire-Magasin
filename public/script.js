@@ -28,9 +28,11 @@ function IsOpenOn(date) {
             if (hours) {
                 const [startTime, endTime] = hours.split('-');
                 if (isWithinHours(date, startTime, endTime)) {
+                    console.log(true);
                     return true;
                 }
             } else {
+                console.log(false);
                 return false; // Day is closed, return false
             }
         }
@@ -52,7 +54,6 @@ function NextOpeningDate(date) {
                     nextDate.setHours(startHours, startMinutes, 0, 0);
 
                     if (nextDate > date) {
-                        console.log(nextDate);
                         return nextDate;
                     }
                 } else {
