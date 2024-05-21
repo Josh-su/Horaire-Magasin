@@ -10,6 +10,8 @@ const testDates = {
     thursday_afternoon: new Date('2024-02-22T14:00:00.000Z'),
 };
 
+console.log(testDates);
+
 test('IsOpenOn returns false for Wednesday', () => {
     expect(IsOpenOn(testDates.wednesday)).toBe(false);
 });
