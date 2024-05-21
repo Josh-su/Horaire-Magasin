@@ -1,6 +1,6 @@
 async function IsOpenOn(date) {
     const queryDate = date.toISOString();
-    const url = `https://horaire-magasin.vercel.app/api/isopen?date=${queryDate}`;
+    const url = `https://horaire-magasin.vercel.app/api/isopenon?date=${queryDate}`;
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -16,7 +16,7 @@ async function IsOpenOn(date) {
 
 async function NextOpeningDate(date) {
     const queryDate = date.toISOString();
-    const url = `https://horaire-magasin.vercel.app/api/nextopening?date=${queryDate}`;
+    const url = `https://horaire-magasin.vercel.app/api/nextopeningdate?date=${queryDate}`;
     try {
         const response = await fetch(url);
         if (!response.ok) {
