@@ -52,6 +52,7 @@ function NextOpeningDate(date) {
                     nextDate.setHours(startHours, startMinutes, 0, 0);
 
                     if (nextDate > date) {
+                        console.log(nextDate);
                         return nextDate;
                     }
                 } else {
