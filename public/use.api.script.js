@@ -30,7 +30,7 @@ async function NextOpeningDate(date) {
     }
 }
 
-async function SetOpeningHours(day, startTime = "", endTime = "") {
+/*async function SetOpeningHours(day, startTime = "", endTime = "") {
     const postData = {
         day, startTime, endTime
     };
@@ -48,10 +48,10 @@ async function SetOpeningHours(day, startTime = "", endTime = "") {
         console.error('Error:', error);
         throw error;
     }
-}
+}*/
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { IsOpenOn, NextOpeningDate, SetOpeningHours };
+    module.exports = { IsOpenOn, NextOpeningDate, /*SetOpeningHours*/ };
 } else {
     document.addEventListener('DOMContentLoaded', async () => {
         try {

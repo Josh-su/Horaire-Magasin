@@ -35,4 +35,3 @@ test('NextOpeningDate returns Monday morning for Saturday', () => {
 test('NextOpeningDate returns Thursday afternoon for Thursday', () => {
     expect(NextOpeningDate(testDates.thursday)).toEqual(testDates.thursday_afternoon);
 });
-

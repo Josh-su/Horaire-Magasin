@@ -68,7 +68,7 @@ function NextOpeningDate(date) {
     return null; // No next opening date found within 7 days
 }
 
-function SetOpeningHours(day, startTime = '', endTime = '') {
+/*function SetOpeningHours(day, startTime = '', endTime = '') {
     // Find the index of the entry corresponding to the provided day
     const index = openingHours.findIndex(entry => entry.days.includes(day));
 
@@ -86,10 +86,10 @@ function SetOpeningHours(day, startTime = '', endTime = '') {
     } else {
         console.error(`No opening hours found for ${day}`);
     }
-}
+}*/
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { IsOpenOn, NextOpeningDate, SetOpeningHours };
+    module.exports = { IsOpenOn, NextOpeningDate, /*SetOpeningHours*/ };
 } else {
     document.addEventListener('DOMContentLoaded', async () => {
         const now = new Date();
