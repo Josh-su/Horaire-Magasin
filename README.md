@@ -1,7 +1,7 @@
 # Horaire-Magasin
 gestion d'horaire
 
-l'application web : [horaire-magasin.vercel.app](https://horaire-magasin.vercel.app/)
+l'application web : [horaire-magasin.vercel.app](https://horaire-magasin.vercel.app/) (ne fonctionne pas car il y un problème avec le changement d'heure)
 
 lien API :
 ### Is Open :
